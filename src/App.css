@@ -1,0 +1,105 @@
+import React, { useState } from "react";
+import { motion } from "framer-motion";
+
+const locations = [
+  {
+    name: "Paris",
+    description: "Stroll by the Eiffel Tower and enjoy romantic evenings by the Seine.",
+    image: "https://source.unsplash.com/featured/?paris",
+  },
+  {
+    name: "Amsterdam",
+    description: "Explore the canals and ride bicycles together through the city.",
+    image: "https://source.unsplash.com/featured/?amsterdam",
+  },
+  {
+    name: "Spain",
+    description: "Enjoy tapas, flamenco dancing, and the vibrant culture.",
+    image: "https://source.unsplash.com/featured/?spain",
+  },
+  {
+    name: "Switzerland",
+    description: "Marvel at the Swiss Alps and cozy up in a mountain cabin.",
+    image: "https://source.unsplash.com/featured/?switzerland",
+  },
+  {
+    name: "Venice",
+    description: "Glide through the canals on a gondola ride and enjoy the charm of the city.",
+    image: "https://source.unsplash.com/featured/?venice",
+  },
+  {
+    name: "Japan",
+    description: "Experience cherry blossoms, sushi, and the beautiful culture we've always dreamed of.",
+    image: "https://source.unsplash.com/featured/?japan",
+  },
+];
+
+export default function ValentineSite() {
+  const [visited, setVisited] = useState(locations.map(() => false));
+
+  const toggleVisited = (index) => {
+    setVisited((prev) => {
+      const newVisited = [...prev];
+      newVisited[index] = !newVisited[index];
+      return newVisited;
+    });
+  };
+
+  const progress = (visited.filter(Boolean).length / locations.length) * 100;
+
+  return (
+    <div className="w-screen h-screen overflow-hidden">
+      {/* Love Letter Section */}
+      <section
+        className="w-screen h-screen flex flex-col items-center justify-center bg-pink-200 text-center p-8"
+        style={{ fontFamily: "'Caveat', cursive", fontSize: "1.5rem" }}
+      >
+        <h1 className="text-4xl mb-4">To My Love</h1>
+        <p className="max-w-2xl">
+          {/* Replace this with your love letter */}
+          My dearest, you are my everything. This journey we are dreaming of is
+          just the beginning of a lifetime of adventures together. I love you
+          more with every passing day.
+        </p>
+        <p className="mt-4 text-lg">Scroll down to see our dream destinations ❤️</p>
+      </section>
+
+      {/* Travel Locations */}
+      {locations.map((location, index) => (
+        <section
+          key={index}
+          className="w-screen h-screen flex flex-col justify-between items-center bg-cover bg-center text-white"
+          style={{ backgroundImage: `url(${location.image})` }}
+        >
+          <div className="bg-black bg-opacity-50 w-full p-4 text-center">
+            <h2 className="text-4xl font-bold">{location.name}</h2>
+            <p className="mt-2">{location.description}</p>
+          </div>
+          <div className="bg-black bg-opacity-50 w-full p-4 flex justify-center items-center">
+            <label className="flex items-center space-x-2">
+              <input
+                type="checkbox"
+                checked={visited[index]}
+                onChange={() => toggleVisited(index)}
+                className="w-6 h-6 text-pink-500 focus:ring-pink-500"
+              />
+              <span className="text-lg">Mark as Visited</span>
+            </label>
+          </div>
+        </section>
+      ))}
+
+      {/* Progress Bar */}
+      {progress > 0 && (
+        <div className="fixed bottom-0 w-full bg-gray-200">
+          <div
+            className="bg-pink-500 text-white text-center py-2"
+            style={{ width: `${progress}%` }}
+          >
+            Travel the world with me and you will receive a special gift
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
