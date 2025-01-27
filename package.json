@@ -2,7 +2,7 @@
   "name": "valentine-site",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://<your-username>.github.io/<repository-name>",
+  "homepage": "https://nickoman22.github.io/valentine-site",
   "dependencies": {
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
